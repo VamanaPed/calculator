@@ -22,6 +22,8 @@
     background-color: black;
 
     border-style: outset;
+    border-width: 6px;
+    filter: drop-shadow(0px 5px 5px #000000);
 
     display: flex;
     flex-direction: column;
@@ -29,8 +31,9 @@
 
 #screen
 {
-    background-color: rgb(62, 88, 62);
+    background-color: rgb(69, 95, 54);
     font-style: "Calculator";
+    font-size: 32px;
     text-align: end;
 
     border-style: outset;
@@ -43,4 +46,50 @@
     border-style: inset;
     border-width: 3px;
     height: 34px;
+
+    display: flex;
+    flex-direction: row;
 }
+
+.calculator-button
+{
+    border-style: outset;
+    border-width: 3px;
+    border-color: rgb(238, 238, 238);
+    height: 34px;
+
+    font-size: 16px;
+
+    width: 25%;
+    height: auto;
+    text-align: center;
+
+    background-color: white;
+    transition: all 0.2s;
+}
+
+.calculator-button:hover
+{
+    background-color: rgb(243, 243, 243);
+}
+
+.calculator-button:active
+{
+    background-color: rgb(207, 207, 207);
+}
+
+.end
+{
+    border-color: rgb(196, 196, 196);
+    background-color: rgb(233, 233, 233);
+}
+.end:hover { background-color: rgb(216, 216, 216); }
+.end:active { background-color: rgb(180, 180, 180); }
+
+.top
+{
+    border-color: rgb(182, 182, 182);
+    background-color: rgb(194, 194, 194);
+}
+.top:hover { background-color: rgb(180, 180, 180); }
+.top:active { background-color: rgb(146, 146, 146); }
