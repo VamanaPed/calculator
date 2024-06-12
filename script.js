@@ -7,9 +7,49 @@ function divide(a, b)
     return a / b 
 };
 
-function operate(operator, a, b)
-{
+/* Audio */
 
+let audio0 = new Audio("Audio/audiomass-output0.mp3");
+let audio1 = new Audio("Audio/audiomass-output1.mp3");
+let audio2 = new Audio("Audio/audiomass-output2.mp3");
+let audio3 = new Audio("Audio/audiomass-output3.mp3");
+let audio4 = new Audio("Audio/audiomass-output4.mp3");
+let audio5 = new Audio("Audio/audiomass-output5.mp3");
+let audio6 = new Audio("Audio/audiomass-output6.mp3");
+let audio = new Audio("Audio/bip.wav");
+
+function playClick()
+{
+    const rand = Math.floor(Math.random() * 4);
+
+    switch (rand) {
+        case 0:
+                audio0.play();
+            break;
+        case 1:
+                audio1.play();
+            break;
+        case 2:
+                audio2.play();
+            break;
+        case 3:
+                audio3.play();
+            break;
+        case 4:
+                audio4.play();
+            break;
+        case 5:
+                audio5.play();
+            break;
+        case 6:
+                audio6.play();
+            break;
+    }
+}
+
+const calculatorButtons = document.getElementsByClassName(".calculator-button");
+for (const button of calculatorButtons) {
+    button.onclick = () => playRandomClick();
 }
 
 const displayScreen = document.querySelector("#screen");
@@ -20,12 +60,21 @@ const overflowText = document.querySelector("#overflow");
 function updateDisplay(text)
 {
     displayValue = text;
+    const string = text.toString();
     const length = text.toString().length;
     
     if(length > 8)
     {
         overflowText.textContent = displayValue;
-        displayValue = "error";
+
+        if(text.toString().includes("."))
+        {
+            displayValue = text.toString().substr(0, 8);
+        }
+        else
+        {
+            displayValue = "error";
+        }
     }
     else overflowText.textContent = "";
 
@@ -39,11 +88,14 @@ let valueB = 0;
 let operatorValue = '';
 
 let onValueA = true;
+let justPressedOperator = false;
 
 let decimalAt = -1;
 
 function submitValue(input)
 {
+    justPressedOperator = false;
+
     if(onValueA)
     {
         if(valueA === 0)
@@ -80,10 +132,18 @@ function submitValue(input)
 
 function submitOperator(operator)
 {
-    if(!onValueA)
+    if(!justPressedOperator)
     {
-        submitEnter();
+        if(!onValueA)
+        {
+            submitEnter();
+        }
+
+        onValueA = !onValueA;
     }
+
+    justPressedOperator = true;
+    
 
     switch (operator) {
         case 'add':
@@ -106,12 +166,12 @@ function submitOperator(operator)
                 operatorValue = operator;
             break;
     }
-
-    onValueA = !onValueA;
 }
 
 function submitEnter()
 {
+    justPressedOperator = false;
+
     if(!onValueA)
     {
         const result = calculate(valueA, valueB, operatorValue);
@@ -126,6 +186,8 @@ function submitEnter()
 
 function submitDecimal()
 {
+    justPressedOperator = false;
+
     if(onValueA)
     {
         if(valueA === 0)
@@ -144,6 +206,8 @@ function submitDecimal()
 
 function deleteBack()
 {
+    justPressedOperator = false;
+
     if(onValueA)
     {
         if(valueA === 0)
@@ -213,6 +277,7 @@ function clearFunction()
     valueB = 0;
 
     onValueA = true;
+    justPressedOperator = false;
 
     decimalAt = -1;
 

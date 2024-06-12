@@ -13,44 +13,44 @@
                 &#128425;
             </div>
             <div class="row" id="row-1">
-                <button class="calculator-button top"></button>
-                <button class="calculator-button top"></button>
-                <button class="calculator-button top" onclick="deleteBack()">&lt;</button>
-                <button class="calculator-button top" onclick="clearFunction()">C</button>
+                <button class="calculator-button top" onclick="playClick()"></button>
+                <button class="calculator-button top" onclick="playClick()"></button>
+                <button class="calculator-button top" onclick="deleteBack(); playClick()">&lt;</button>
+                <button class="calculator-button top" onclick="clearFunction(); playClick()">C</button>
             </div>
             <div class="row" id="row-2">
                 <button class="calculator-button" 
-                onclick="submitValue(7)">7</button>
+                onclick="submitValue(7); playClick()">7</button>
                 <button class="calculator-button" 
-                onclick="submitValue(8)">8</button>
+                onclick="submitValue(8); playClick()">8</button>
                 <button class="calculator-button" 
-                onclick="submitValue(9)">9</button>
-                <button class="calculator-button end" onclick="submitOperator('divide')">&#247;</button>
+                onclick="submitValue(9); playClick()">9</button>
+                <button class="calculator-button end" onclick="submitOperator('divide'); playClick()">&#247;</button>
             </div>
             <div class="row" id="row-3">
                 <button class="calculator-button" 
-                onclick="submitValue(4)">4</button>
+                onclick="submitValue(4); playClick()">4</button>
                 <button class="calculator-button" 
-                onclick="submitValue(5)">5</button>
+                onclick="submitValue(5); playClick()">5</button>
                 <button class="calculator-button" 
-                onclick="submitValue(6)">6</button>
-                <button class="calculator-button end" onclick="submitOperator('multiply')">&times;</button>
+                onclick="submitValue(6); playClick()">6</button>
+                <button class="calculator-button end" onclick="submitOperator('multiply'); playClick()">&times;</button>
             </div>
             <div class="row" id="row-4">
                 <button class="calculator-button"
-                onclick="submitValue(1)">1</button>
+                onclick="submitValue(1); playClick()">1</button>
                 <button class="calculator-button"
-                onclick="submitValue(2)">2</button>
+                onclick="submitValue(2); playClick()">2</button>
                 <button class="calculator-button"
-                onclick="submitValue(3)">3</button>
-                <button class="calculator-button end" onclick="submitOperator('subtract')">-</button>
+                onclick="submitValue(3); playClick()">3</button>
+                <button class="calculator-button end" onclick="submitOperator('subtract'); playClick()">-</button>
             </div>
             <div class="row" id="row-5">
                 <button class="calculator-button"
-                onclick="submitValue(0)">0</button>
-                <button class="calculator-button" onclick="submitDecimal()">.</button>
-                <button class="calculator-button end" onclick="submitEnter()">&equals;</button>
-                <button class="calculator-button end" onclick="submitOperator('add')">&plus;</button>
+                onclick="submitValue(0); playClick()">0</button>
+                <button class="calculator-button" onclick="submitDecimal(); playClick()">.</button>
+                <button class="calculator-button end" onclick="submitEnter(); playClick()">&equals;</button>
+                <button class="calculator-button end" onclick="submitOperator('add'); playClick()">&plus;</button>
             </div>
         </div>
     </div>
