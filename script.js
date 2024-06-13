@@ -145,21 +145,25 @@ function submitOperator(operator)
 
     switch (operator) {
         case 'add':
+        case '+':
                 updateDisplay(`\u{002b}`);
                 operatorValue = operator;
             break;
     
         case 'subtract':
+        case '-':
                 updateDisplay(`\u{002d}`);
                 operatorValue = operator;
             break;
 
         case 'multiply':
+        case '*':
                 updateDisplay(`\u{00d7}`);
                 operatorValue = operator;
             break;
     
         case 'divide':
+        case '/':
                 updateDisplay(`\u{00f7}`);
                 operatorValue = operator;
             break;
@@ -283,18 +287,22 @@ function calculate(a, b, operator)
 
     switch (operator) {
         case 'add':
+        case '+':
                 result = add(a, b);
             break;
     
         case 'subtract':
+        case '-':
                 result = subtract(a, b);
             break;
 
         case 'multiply':
+        case '*':
                 result = multiply(a, b);
             break;
     
         case 'divide':
+        case '/':
                 result = divide(a, b);
             break;
     }
@@ -337,3 +345,62 @@ fileInput.addEventListener("change", e =>
     const f = e.target.files[0];
     reader.readAsDataURL(f);
 });
+
+/* Keyboard Support */
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    checkKeyPress(key);
+});
+
+function checkKeyPress(key)
+{
+    const keyPresses = [
+        "1","2","3","4","5","6","7","8","9","0","+","/","-","*",".","=",
+        "Enter","Backspace","Delete","c","C"
+    ];
+
+    if(keyPresses.includes(key))
+    {
+        playClick();
+
+        switch (key) {
+            case "Enter":
+            case "=":
+                   submitEnter();
+                break;
+            case "Backspace":
+                    deleteBack();
+                break;
+            case "Delete":
+                    clearFunction();
+                break;
+            case "C":
+            case "c":
+                    clearFunction();
+                break;
+            case "+":
+            case "-":
+            case "*":
+            case "/": 
+                    submitOperator(key);
+                break;
+            case ".":
+                    submitDecimal();
+                break;
+        
+            default:
+                    submitValue(Number.parseInt(key));
+                break;
+        }
+    }
+}
+
+function pr()
+{
+    console.log("ValueA: " + valueA);
+    console.log("Operator: " + operatorValue);
+    console.log("ValueB: " + valueB);
+
+    return(valueA + " " + operatorValue + " " + valueB);
+}
