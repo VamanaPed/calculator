@@ -78,7 +78,6 @@ function updateDisplay(text)
     }
     else overflowText.textContent = "";
 
-    if(decimalAt === 0) text = "0.";
     displayScreen.textContent = displayValue;
 }
 
@@ -90,7 +89,6 @@ let operatorValue = '';
 let onValueA = true;
 let justPressedOperator = false;
 
-let decimalAt = -1;
 
 function submitValue(input)
 {
@@ -107,7 +105,7 @@ function submitValue(input)
         }
         else
         {
-            valueA = Number.parseInt(valueA.toString() + input.toString());
+            valueA = Number.parseFloat(valueA.toString() + input.toString());
         }
 
         updateDisplay(valueA);
@@ -176,7 +174,32 @@ function submitEnter()
     {
         const result = calculate(valueA, valueB, operatorValue);
 
-        updateDisplay("= " + result);
+        if(result === "ERROR")
+        {
+            result = 0;
+
+            updateDisplay("= " + result);
+        } 
+        else
+        {
+            let round = 0;
+
+            if(result.toString().length > 6)
+                round = customRound(result, 6);
+            else
+                round = customRound(result, result.toString().length);
+
+            if(round !== result)
+            {
+                overflowText.textContent = result;
+
+                updateDisplay("= " + round);
+            }
+            else
+            {
+                updateDisplay("= " + result);
+            }
+        }
 
         onValueA = true;
         valueA = result;
@@ -190,17 +213,21 @@ function submitDecimal()
 
     if(onValueA)
     {
-        if(valueA === 0)
+        if(!valueA.toString().includes("."))
         {
-            valueA = Number.parseFloat("0.");
-            decimalAt = 0;
-        }
-        else
-        {
-            valueA = Number.parseFloat(valueA.toString() + ".")
+            valueA = valueA + ".";
         }
 
         updateDisplay(valueA);
+    }
+    else
+    {
+        if(!valueB.toString().includes("."))
+        {
+            valueB = valueB + ".";
+        }
+
+        updateDisplay(valueB);
     }
 }
 
@@ -218,7 +245,10 @@ function deleteBack()
         {
             let arr = valueA.toString().split("");
             arr.pop();
+
             valueA = Number.parseInt(arr.join(""));
+
+            valueB = valueB + ".";
 
             if(!valueA) valueA = 0;
         }
@@ -235,7 +265,10 @@ function deleteBack()
         {
             let arr = valueB.toString().split("");
             arr.pop();
+
             valueB = Number.parseFloat(arr.join(""));
+
+            valueB = valueB + ".";
 
             if(!valueB) valueB = 0;
         }
@@ -269,6 +302,12 @@ function calculate(a, b, operator)
     return result;
 }
 
+function customRound(number, decimalPlaces) 
+{
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.round(number * factor) / factor;
+}
+
 function clearFunction()
 {
     updateDisplay("0");
@@ -278,8 +317,6 @@ function clearFunction()
 
     onValueA = true;
     justPressedOperator = false;
-
-    decimalAt = -1;
 
     operatorValue = '';
 }
