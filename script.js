@@ -252,8 +252,6 @@ function deleteBack()
 
             valueA = Number.parseInt(arr.join(""));
 
-            valueB = valueB + ".";
-
             if(!valueA) valueA = 0;
         }
 
@@ -271,8 +269,6 @@ function deleteBack()
             arr.pop();
 
             valueB = Number.parseFloat(arr.join(""));
-
-            valueB = valueB + ".";
 
             if(!valueB) valueB = 0;
         }
@@ -348,7 +344,16 @@ fileInput.addEventListener("change", e =>
 
 /* Keyboard Support */
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keypress', function(e) 
+{
+    if (e.key === "Enter") 
+    {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('keydown', function(event) 
+{
     const key = event.key;
     checkKeyPress(key);
 });
