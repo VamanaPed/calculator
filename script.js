@@ -320,3 +320,20 @@ function clearFunction()
 
     operatorValue = '';
 }
+
+
+/* Change Background */
+
+const reader = new FileReader();
+const fileInput = document.getElementById("file");
+
+reader.onload = e =>
+{
+    document.body.style.backgroundImage = "url('" + reader.result + "')";
+};
+
+fileInput.addEventListener("change", e =>
+{
+    const f = e.target.files[0];
+    reader.readAsDataURL(f);
+});
